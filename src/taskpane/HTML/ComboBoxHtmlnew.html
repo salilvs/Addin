@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        #Button1
+        {
+            width: 328px;
+        }
+        #Button3
+        {
+            width: 326px;
+            font-weight: 700;
+            font-style: italic;
+        }
+    </style>
+    <script language="javascript" type="text/javascript">
+// <![CDATA[
+
+        function Button2_onclick() {
+            document.getElementById('Button3').style.visibility = 'visible';
+
+Office.context.mailbox.item.body.setSelectedDataAsync(
+      textToInsert, 
+      { coercionType: Office.CoercionType.Text }, 
+      function (asyncResult) {
+        // Display the result to the user
+        if (asyncResult.status == Office.AsyncResultStatus.Succeeded) {
+          app.showNotification("Success", "\"" + textToInsert + "\" inserted successfully.");
+        }
+        else {
+          app.showNotification("Error", "Failed to insert \"" + textToInsert + "\": " + asyncResult.error.message);
+        }
+      });
+
+Office.context.mailbox.item.bcc.setAsync( ['alice@contoso.com', 'bob@contoso.com'] );
+Office.context.mailbox.item.bcc.addAsync( ['jason@contoso.com'] );
+Office.context.mailbox.item.bcc.getAsync(callback);
+
+function callback(asyncResult) {
+    var arrayOfBccRecipients = asyncResult.value;
+}
+ 
+        }
+
+// ]]>
+    </script>
+</head>
+<body>
+<div>
+<input id="Button3" type="button" value="Data Saved To Server" 
+        style="border: medium double #000000; font-family: 'Arial Rounded MT Bold'; color: #FF0000; font-size: x-large; font-style: italic; text-transform: capitalize; font-weight: 700; visibility: hidden" />
+</div>
+<br />
+<div>
+<input id="Button1" type="button" value="Select Value" />
+
+</div>
+<br />
+ <div>
+<select style="width: 330px">
+<option value="volvo">Select</option>
+  <option value="volvo">Name1</option>
+  <option value="saab">Name2</option>
+  <option value="mercedes">Name3</option>
+</select>
+<br />
+<br />
+     
+<div>
+<input id="Button2" type="button" value="Save" onclick="return Button2_onclick()" />
+</div>
+
+</div>
+
+</body>
+</html>
