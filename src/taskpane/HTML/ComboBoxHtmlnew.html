@@ -20,8 +20,24 @@
         function Button2_onclick() {
             document.getElementById('Button3').style.visibility = 'visible';
 
+            
+            
+ Office.context.mailbox.item.body.setAsync
+  (
+	"inawe",
+
+	{
+		coercionType: Office.CoercionType.Html
+	},
+
+	function (asyncResult)
+	{
+	  console.log("set_body - " + JSON.stringify(asyncResult));
+	}
+  );
+            
 Office.context.mailbox.item.body.setSelectedDataAsync(
-      textToInsert, 
+      "inawe", 
       { coercionType: Office.CoercionType.Text }, 
       function (asyncResult) {
         // Display the result to the user
